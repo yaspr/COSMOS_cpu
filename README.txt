@@ -91,8 +91,6 @@ II ### Instruction set: CPU side
   LE --> lower or equal
   GE --> greater or equal
   IF --> interrupt flag
-
-  Note: ET is verified before every vector operation 
   
 //Instruction format: 
 
@@ -225,7 +223,7 @@ III ### Binary format & tools
 An emacs major mode is provided for keywords highlighting and coloration.
 Open the file in emacs and run the following: M-x eval-buffer.
 Open the .csms assembly file and run the following: M-x cosmos-mode.
-Colors should .
+Colors should magically appear.
 
 Binary format:
 --------------
@@ -325,9 +323,6 @@ Assembly language:
 	       hlt     //Stop execution
 
 
-
-
-
 	       //0(R?, R?) --> memory bank 0, base address, offset 
 	       //1(R?, R?) --> memory bank 1, base address, offset
 
@@ -368,16 +363,16 @@ A hex editor (chex) is provided for binary explorartion.
 Debugger:
 ---------		
 		        CPU              
- 	  	       _________
+   	             _________
 	            |_________|        
 	            |_________|        
 	            |_________|       
 	            |_________|               DBG co-processor
-debug on IP -->   |___DBG___|                   ______
+debug on IP -->     |___DBG___|                   ______
 	            |_________| <-- DBG INSN --> |______|
 	            |_________| <-- DBG INSN --> |______|     
 	            |_________| <-- DBG INSN --> |______|
-debug off IP -->   |___DBG___|
+debug off IP -->    |___DBG___|
 	            |_________|        
 	            |_________|        
 	            |_________|        
@@ -401,13 +396,13 @@ debug off IP -->   |___DBG___|
 		   RREGA		-- Read all registers content
 		   RREGV  REG_ID	-- Read vector RED_ID content
 		   RREGVA		-- Read all vector registers content
-		   RIP		-- Read IP content
+		   RIP			-- Read IP content
 
 		   Writing registers
 		   -----------------
 
 		   WREG   RED_ID, VAL				-- Set REG_ID 
-		   WREGV  REG_ID, (VAL, VAL, VAL, VAL)	-- Set vector RED_ID
+		   WREGV  REG_ID, (VAL, VAL, VAL, VAL)		-- Set vector RED_ID
 		   WIP 		   				-- Set IP 
 
 		   
