@@ -222,7 +222,7 @@ III ### Binary format & tools
 
 An emacs major mode is provided for keywords highlighting and coloration.
 Open the file in emacs and run the following: M-x eval-buffer.
-Open the .csms assembly file and run the following: M-x cosmos-mode.
+Open the .ss assembly file and run the following: M-x cosmos-mode.
 Colors should magically appear.
 
 Binary format:
