@@ -49,7 +49,7 @@ tsc r12
 
 sub r12, r12, r13
 
-#15
+!!#15
 @ __ "Vector cycles: "
 
 prnts __

@@ -45,17 +45,21 @@ jlt lblinit_B
 
 #### Dot product ####
 
+#Array index
 xor r7, r7, r7
-xor r5, r5, r5
+
+#Reduction variable
+xor r5, r5, r5 
 
 .lbl_Dotprod
 
 #Load from array A
 loadw r2, 0(r0, r7)
 
-#Load from array A
+#Load from array B
 loadw r3, 0(r1, r7)
 
+#r5 += r2 * r3
 fma r5, r2, r3
 
 inc r7

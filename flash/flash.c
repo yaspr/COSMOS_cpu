@@ -105,7 +105,7 @@ int main(int argc, char **argv)
   set_interface_attribs(fd, B9600); 
   set_mincount(fd, 0);
 
-
+  
   printf("Press enter to start!\n");
 
   //Interactive mode
