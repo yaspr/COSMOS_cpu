@@ -431,7 +431,9 @@ After the code is uploaded and ran, the program's output should be printed on th
       
 The flasher has been tested with the Teensy3.6 COSMOS firmware & the Arduino Due COSMOS firmware for all given examples.
 
-
+COSMOS Board:
+-------------
+See picture board.jpg.
 
 
 ---------------------------------------------------------------------------------------------------------------------------------
