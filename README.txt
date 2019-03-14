@@ -364,56 +364,17 @@ Hex editor:
 
 A hex editor (chex) is provided for binary exploration.
 
-Debugger:
----------		
-		        CPU              
-   	             _________
-	            |_________|        
-	            |_________|        
-	            |_________|       
-	            |_________|               DBG co-processor
-debug on IP -->     |___DBG___|                   ______
-	            |_________| <-- DBG INSN --> |______|
-	            |_________| <-- DBG INSN --> |______|     
-	            |_________| <-- DBG INSN --> |______|
-debug off IP -->    |___DBG___|
-	            |_________|        
-	            |_________|        
-	            |_________|        
-	            |_________|        
-	            |_________|        
-	               Code
-	
-		CPU debug instructions:
-		
-		   DBG --> toggles dbg flag
-		       DBG_MODE_ACT
-		       DBG_MODE_NACT
+Debug Mode:
+---------
 
-		       
-		DBG co-processor instructions:
 
-		   Reading registers
-		   -----------------
-		   
-		   RREG   RED_ID	-- Read REG_ID content
-		   RREGA		-- Read all registers content
-		   RREGV  REG_ID	-- Read vector RED_ID content
-		   RREGVA		-- Read all vector registers content
-		   RIP			-- Read IP content
-
-		   Writing registers
-		   -----------------
-
-		   WREG   RED_ID, VAL				-- Set REG_ID 
-		   WREGV  REG_ID, (VAL, VAL, VAL, VAL)		-- Set vector RED_ID
-		   WIP 		   				-- Set IP 
+		WIP
 
 
 Firmware:
 ---------
 The firmware codes provided are for Teensy3.6 boards and Arduino Due boards, both these boards can simulate
-a COSMOS CPU and binary can be uploaded to the CPU code memory.
+a COSMOS CPU and binaries can be uploaded to the CPU code memory.
 
 Flasher/uploader:
 -----------------
@@ -425,7 +386,7 @@ Three commands are available:
       
       . blink: makes the board default LED blink in an erratic way.
 
-      .send: asks for the path to the binary file to upload onto the board.
+      . send: asks for the path to the binary file to upload onto the board.
 
 After the code is uploaded and ran, the program's output should be printed on the standard output before the command prompt is available again.
       
