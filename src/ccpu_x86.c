@@ -773,9 +773,22 @@ mem32 load_code(FILE *fd)
 mem32 load_header(FILE *fd)
 { return fread(&_header_, sizeof(mem32), 1, fd); }
 
+//
+void print_logo()
+{
+  printf("   _____ ____   _____ __  __  ____   _____ \n"
+	 "  / ____/ __ \\ / ____|  \\/  |/ __ \\ / ____|\n"
+	 " | |   | |  | | (___ | \\  / | |  | | (___  \n"
+	 " | |   | |  | |\\___ \\| |\\/| | |  | |\\___ \\ \n"
+	 " | |___| |__| |____) | |  | | |__| |____) |\n"
+	 "  \\_____\\____/|_____/|_|  |_|\\____/|_____/ \n\n");
+}
+
 //Entry point
 int main(int argc, char **argv)
 {
+  print_logo();
+
   srand(time(NULL));
   
   IP = 0;

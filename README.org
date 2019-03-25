@@ -1,21 +1,20 @@
-COSMOS Microarchitecture 
-- Yaspr 2019 - 
-Cosmic Freedom License
-	This document and everything it describes is open and free of rights
-and charges everywhere in the cosmos at all times.
+#+TITLE: COSMOS Microarchitecture 
+#+AUTHOR: Yaspr
+#+DATE: 2019
+ 
+# LICENSE 
+# Cosmic Freedom License
+# 	This document and everything it describes is open and free of rights
+#       and charges everywhere in the cosmos at all times.
 
-TODO:
-	### Add proper error management ###
-	Debugger (90%)
-	Smart assembler (dead code elimination, optimizations, ?) (50%)
-	High level language & compiler (20%)
+* TODO Remaining tasks:
+  ### Add proper error management ###
+  Debugger (90%)
+  Smart assembler (dead code elimination, optimizations, ?) (50%)
+  High level language & compiler (20%)
 	
 
-					      Architectural details
-------------------------------------------------------------------------------------------------
-
-
-I ### Basic circuit components for building a board
+* I ### Basic circuit components for building a board
 ------------------------------------------------------------------------------------------------
 
 
@@ -69,7 +68,7 @@ I ### Basic circuit components for building a board
 
 
 
-II ### Instruction set: CPU side
+* II ### Instruction set: CPU side
 ------------------------------------------------------------------------------------------------
 
 //Registers:
@@ -217,7 +216,7 @@ II ### Instruction set: CPU side
 
 
 
-III ### Binary format & tools
+* III ### Binary format & tools
 ------------------------------------------------------------------------------------------------
 
 An emacs major mode is provided for keywords highlighting and coloration.
@@ -225,8 +224,9 @@ Open the file in emacs and run the following: M-x eval-buffer.
 Open the .ss assembly file and run the following: M-x cosmos-mode.
 Colors should magically appear.
 
-Binary format:
---------------
+** Binary format:
+-----------------
+
 		[32bit HEADER]
 		       bit0: if set, code section present
 		       bit1: if set, strings section present
@@ -245,139 +245,140 @@ Binary format:
 
 		       32bit instructions and 32 bit immediate operands
 
-Assembly language:
-------------------
+** Assembly language:
+---------------------
 
 	 /!\ Opcodes and registers must be lower case
 
-	 Assembly format:
+*** Assembly format:
 	 
-	 OPCODE DST_REGISTER, SRC_REGISTER, SRC_REGISTER 
-	 OPCODE DST_REGISTER, SRC_REGISTER
-	 OPCODE DST_REGISTER
-	 OPCODE DST_REGISTER, IMMEDIATE
-	 OPCODE LABEL_ID
-	 OPCODE STRING_ID
-	 OPCODE DST_REGISTER, MEM_BANK_ID(ADDRESS_REGISTER, INDEX_REGISTER)
-	 OPCODE MEM_BANK_ID(ADDRESS_REGISTER, INDEX_REGISTER), DST_REGISTER
-	 OPCODE
+    OPCODE DST_REGISTER, SRC_REGISTER, SRC_REGISTER 
+    OPCODE DST_REGISTER, SRC_REGISTER
+    OPCODE DST_REGISTER
+    OPCODE DST_REGISTER, IMMEDIATE
+    OPCODE LABEL_ID
+    OPCODE STRING_ID
+    OPCODE DST_REGISTER, MEM_BANK_ID(ADDRESS_REGISTER, INDEX_REGISTER)
+    OPCODE MEM_BANK_ID(ADDRESS_REGISTER, INDEX_REGISTER), DST_REGISTER
+    OPCODE
 
-	 String declaration:
+*** String declaration:
 
-	 @ STRING_ID "STRING"
-
-	 .LABEL_ID
-
-
-
-	 --- Assembly instructions:
+    @ STRING_ID "STRING"
+    
+    .LABEL_ID
 	 
-	       add r, r, r
-	       sub r, r, r
-	       mul r, r, r 
-	       div r, r, r 
-	       mod r, r, r
-	       inc r 
-	       dec r                    
-	       fma r, r, r
 
-	       vadd v, v, v
-	       vsub v, v, v
-	       vmul v, v, v 
-	       vdiv v, v, v 
-	       vmod v, v, v
-	       vfma v, v, v
-	     
-	       and  r, r, r
-	       or   r, r, r
-	       xor  r, r, r
-	       not  r, r
-	       shl  r, r, r
-	       shr  r, r, r
-	       rol  r, r, r 
-	       ror  r, r, r               
-	       pcnt r, r
-	       lmb  r, r
-	       rmb  r, r
-	       rev  r, r
-	       
-             vand v, v, v
-	       vor  v, v, v
-	       vxor v, v, v
-	       vnot v, v, v
-	       vshl v, v, v
-	       vshr v, v, v
-	       vrol v, v, v
-	       vror v, v, v
-  
-	       cmp r0, r1 //r0 (> | >= | < | <= | ==) r1
-	       
-	       jmp label_id  
-	       jeq label_id   
-	       jne label_id   
-	       jgt label_id   
-	       jlt label_id   
-	       jge label_id  
-	       jle label_id       
+*** Assembly instructions:
+	 
+    add r, r, r
+    sub r, r, r
+    mul r, r, r 
+    div r, r, r 
+    mod r, r, r
+    inc r 
+    dec r                    
+    fma r, r, r
 
-	       hlt     //Stop execution
+    vadd v, v, v
+    vsub v, v, v
+    vmul v, v, v 
+    vdiv v, v, v 
+    vmod v, v, v
+    vfma v, v, v
+    
+    and  r, r, r
+    or   r, r, r
+    xor  r, r, r
+    not  r, r
+    shl  r, r, r
+    shr  r, r, r
+    rol  r, r, r 
+    ror  r, r, r               
+    pcnt r, r
+    lmb  r, r
+    rmb  r, r
+    rev  r, r
+    
+    vand v, v, v
+    vor  v, v, v
+    vxor v, v, v
+    vnot v, v, v
+    vshl v, v, v
+    vshr v, v, v
+    vrol v, v, v
+    vror v, v, v
+    
+    cmp r0, r1 //r0 (> | >= | < | <= | ==) r1
+    
+    jmp label_id  
+    jeq label_id   
+    jne label_id   
+    jgt label_id   
+    jlt label_id   
+    jge label_id  
+    jle label_id       
+    
+    hlt     //Stop execution
 
-
-	       //0(R?, R?) --> memory bank 0, base address, offset 
-	       //1(R?, R?) --> memory bank 1, base address, offset
-
-	       loadw r, b(r, r)      	   //Load a 32b integer
-	       storw b(r, r), r     	   //Store a 32b integre
-
-	       loadb r, b(r, r)     	   //Load character
-	       storb b(r, r), r     	   //Store character
-
-	       loadv v, b(r, r)
-	       storv b(r, r), v
-	       
-	       movw r, imm		   //Move a 32b integer  
-	       movb r, imm     		   //Move a character
-	       mov  r, r       		   //Move a register into another
-		 movv v, v
+    //0(R?, R?) --> memory bank 0, base address, offset 
+    //1(R?, R?) --> memory bank 1, base address, offset
+    
+    loadw r, b(r, r)      	   //Load a 32b integer
+    storw b(r, r), r     	   //Store a 32b integre
+    
+    loadb r, b(r, r)     	   //Load character
+    storb b(r, r), r     	   //Store character
+    
+    loadv v, b(r, r)
+    storv b(r, r), v
+    
+    movw r, imm		   //Move a 32b integer  
+    movb r, imm     		   //Move a character
+    mov  r, r       		   //Move a register into another
+    movv v, v
  
-             prntw r			   //Print an integer on stdout
-	       inptw r         		   //Read an integer from stout
+    prntw r			   //Print an integer on stdout
+    inptw r         		   //Read an integer from stout
+    
+    prntb r         		   //Print an character on stdout
+    inptb r         		   //Read an character from stdout
+    
+    prnts string_id       	   //Print a string defined by string_id 
 
-	       prntb r         		   //Print an character on stdout
-	       inptb r         		   //Read an character from stdout
+    tsc   r  		   	   //Time Stamp counter (arch dependent)
+    
+**** Assembler:
+---------------
 
-	       prnts string_id       	   //Print a string defined by string_id 
-
-             tsc   r  		   	   //Time Stamp counter (arch dependent)
-	     
-Assembler:
-----------
 (casm) is the assembler.
 
-Disassembler:
--------------
+**** Disassembler:
+------------------
 
 The disassembler (dasm) produces reassemblable code.
 
-Hex editor:
------------
+**** Hex editor:
+----------------
 
 A hex editor (chex) is provided for binary exploration.
 
-Debug Mode:
----------
+**** Debug Mode:
+----------------
 
 
 		WIP
 
 
-Firmware:
----------
+**** Firmware:
+--------------
+
 The firmware codes provided are for Teensy3.6 boards and Arduino Due boards, both these boards can simulate
 a COSMOS CPU and binaries can be uploaded to the CPU code memory.
 
-Flasher/uploader:
------------------
+**** Flasher/uploader:
+----------------------
+
 A flasher/binary uploader is provided for use with a board simulating the CPU through a USB to serial interface.
 Three commands are available:
 
@@ -392,12 +393,16 @@ After the code is uploaded and ran, the program's output should be printed on th
       
 The flasher has been tested with the Teensy3.6 COSMOS firmware & the Arduino Due COSMOS firmware for all given examples.
 
-COSMOS Board:
--------------
-See picture board.jpg.
+**** COSMOS Board:
+------------------
+
+See picture board.jpg. Circuit is WIP.
+
+
 
 
 ---------------------------------------------------------------------------------------------------------------------------------
 Bugs may arise please be kind and report them to [ binary(dot)yaspr(at)gmail(dot)com ] with the following subject: [COSMOS BUG]).
+
 
 :]
