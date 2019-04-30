@@ -71,7 +71,7 @@
 * II ### Instruction set: CPU side
 ------------------------------------------------------------------------------------------------
 
-//Registers:
+** Registers:
 
   //General purpose:
     
@@ -91,7 +91,7 @@
   GE --> greater or equal
   IF --> interrupt flag
   
-//Instruction format: 
+** Instruction format: 
 
               32bit long instruction: 
 	          [opcode(1B)][format(9b)][opd(5b)][opd(5b)][opd(5b)]
@@ -114,7 +114,7 @@
 
 		     bit8: unused
 
-//Scalar Arithmetic operations:
+** Scalar Arithmetic operations:
 
 	       ADD R, R, R
 	       SUB R, R, R
@@ -126,7 +126,7 @@
 	       FMA R, R, R   -- Fused Multiply Add: R += R * R
 	       FMS R, R, R   -- Fused Multiply Subtract: R -= R * R
 
-//Vector Arithmetic operations:
+** Vector Arithmetic operations:
 
 	       ADDV V, V, V
 	       SUBV V, V, V
@@ -136,7 +136,7 @@
 	       FMAV V, V, V
 	       FMSV V, V, V
 	     
-//Logic Scalar operations:
+** Logic Scalar operations:
 
 	       AND  R, R, R
 	       OR   R, R, R
@@ -151,7 +151,7 @@
 	       RMB  R, R
 	       REV  R, R
 	      	       
-//Logic Vector operations:
+** Logic Vector operations:
 
 	       ANDV V, V, V
 	       ORV  V, V, V
@@ -162,7 +162,7 @@
 	       ROLV V, V, V
 	       RORV V, V, V
   
-//Control operations:
+** Control operations:
 
 	       CMP R, R //left R (> | >= | < | <= | ==) right R
 	       JMP IMM //Label in assembly 
@@ -174,7 +174,7 @@
 	       JLE IMM //Label in assembly      
 	       HLT
 
-//Memory operations:
+** Memory operations:
 
 	       //0(R?, R?) --> memory bank 0, base address, offset 
 	       //1(R?, R?) --> memory bank 1, base address, offset
@@ -191,29 +191,24 @@
 	       MOVB R, IMM     //Move a character
 	       MOV  R, R       //Move a register into another
  
-//Input/Output operations:
+** Input/Output operations:
 
              PRNTW R         //Print integer
-	       INPTW R         //Read integer 
-	       PRNTB R         //Print character
-	       INPTB R         //Read character
-	       PRNTS IMM       //Print string IMM is the string table ID
-	       INPTS IMM       //Read string
-
-	       -- Only on boards with SD card slot
-	       
-	       RDB R, MEM   //Read  512B block from HDD
-	       WRB R, MEM   //Write 512B block on HDD
+	     INPTW R         //Read integer 
+	     PRNTB R         //Print character
+	     INPTB R         //Read character
+	     PRNTS IMM       //Print string IMM is the string table ID
+	     INPTS IMM       //Read string
+	     
+	     -- Only on boards with SD card slot
+	     
+	     RDB R, MEM   //Read  512B block from HDD
+	     WRB R, MEM   //Write 512B block on HDD
 	    
-//Timing operations:
+** Timing operations:
        
-             TSC   R  //Time Stamp Counter; read milliseconds or cycles (arch dependent)
-	       DELAY R  //Delays in milliseconds
-
-
-
-
-
+   TSC   R  //Time Stamp Counter; read milliseconds or cycles (arch dependent)
+   DELAY R  //Delays in milliseconds
 
 
 * III ### Binary format & tools
